@@ -1,0 +1,209 @@
+<svg fill="none" viewBox="0 0 800 400" width="800" height="400" xmlns="http://www.w3.org/2000/svg">
+  <foreignObject width="100%" height="100%">
+    <div xmlns="http://www.w3.org/1999/xhtml">
+      <style>
+        @keyframes gradientBackground {
+          0% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+          100% {
+            background-position: 0% 50%;
+          }
+        }
+        
+        @keyframes fadeIn {
+          0% {
+            opacity: 0;
+          }
+          66% {
+            opacity: 0;
+          }
+          100% {
+            opacity: 1;
+          }
+        }
+        
+        @keyframes typing {
+          from {
+            width: 0;
+          }
+          to {
+            width: 100%;
+          }
+        }
+        
+        .container {
+          font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          margin: 0;
+          width: 100%;
+          height: 400px;
+          background: linear-gradient(-45deg, #FC466B, #3F5EFB, #4BCF50, #FCBC0F);
+          background-size: 600% 400%;
+          animation: gradientBackground 10s ease infinite;
+          border-radius: 10px;
+          color: white;
+          text-align: center;
+        }
+        
+        h1 {
+          font-size: 50px;
+          line-height: 1.3;
+          letter-spacing: 5px;
+          text-transform: uppercase;
+          text-shadow: 0 1px 0 #efefef, 0 2px 0 #efefef, 0 3px 0 #efefef, 0 4px 0 #efefef, 0 12px 5px rgba(0, 0, 0, 0.1);
+          animation: fadeIn 1s ease-in-out;
+        }
+        
+        .typewriter h2 {
+          overflow: hidden;
+          border-right: .15em solid orange;
+          white-space: nowrap;
+          margin: 0 auto;
+          font-size: 1.6rem;
+          animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+        }
+        
+        @keyframes blink-caret {
+          from, to { border-color: transparent }
+          50% { border-color: orange; }
+        }
+
+        .socials {
+          margin-top: 30px;
+          display: flex;
+          justify-content: center;
+          gap: 20px;
+        }
+        
+        .socials a {
+          color: white;
+          text-decoration: none;
+          font-size: 24px;
+          padding: 10px;
+          transition: all 0.3s ease-in-out;
+        }
+        
+        .socials a:hover {
+          transform: translateY(-5px);
+        }
+        
+        .tech-stack {
+          margin-top: 20px;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 10px;
+          max-width: 600px;
+        }
+        
+        .tech {
+          background-color: rgba(255, 255, 255, 0.1);
+          border-radius: 5px;
+          padding: 7px 12px;
+          font-weight: 500;
+          backdrop-filter: blur(5px);
+          transition: all 0.3s ease;
+        }
+        
+        .tech:hover {
+          transform: scale(1.05);
+          background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .matrix-animation {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
+          z-index: 1;
+        }
+        
+        .content {
+          position: relative;
+          z-index: 2;
+          width: 100%;
+        }
+      </style>
+
+      <div class="container">
+        <div class="matrix-animation" id="matrix-canvas"></div>
+        <div class="content">
+          <h1>你的名字</h1>
+          <div class="typewriter">
+            <h2>软件工程师 | 开源贡献者 | 技术博主</h2>
+          </div>
+          <div class="tech-stack">
+            <span class="tech">JavaScript</span>
+            <span class="tech">React</span>
+            <span class="tech">Node.js</span>
+            <span class="tech">Python</span>
+            <span class="tech">Docker</span>
+            <span class="tech">AWS</span>
+            <span class="tech">Kubernetes</span>
+            <span class="tech">TensorFlow</span>
+          </div>
+          <div class="socials">
+            <a href="https://github.com/你的用户名">GitHub</a>
+            <a href="https://twitter.com/你的用户名">Twitter</a>
+            <a href="https://linkedin.com/in/你的用户名">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+
+      <script type="text/javascript">
+        // Matrix背景动画
+        document.addEventListener('DOMContentLoaded', function() {
+          const canvas = document.createElement('canvas');
+          canvas.width = 800;
+          canvas.height = 400;
+          canvas.style.position = 'absolute';
+          canvas.style.top = '0';
+          canvas.style.left = '0';
+          canvas.style.opacity = '0.1';
+          
+          document.getElementById('matrix-canvas').appendChild(canvas);
+          
+          const ctx = canvas.getContext('2d');
+          const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'.split('');
+          const fontSize = 10;
+          const columns = canvas.width / fontSize;
+          
+          const drops = [];
+          for (let i = 0; i < columns; i++) {
+            drops[i] = 1;
+          }
+          
+          function draw() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = '#0F0';
+            ctx.font = fontSize + 'px monospace';
+            
+            for (let i = 0; i < drops.length; i++) {
+              const text = characters[Math.floor(Math.random() * characters.length)];
+              ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+              
+              if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                drops[i] = 0;
+              }
+              
+              drops[i]++;
+            }
+          }
+          
+          setInterval(draw, 33);
+        });
+      </script>
+    </div>
+  </foreignObject>
+</svg>
